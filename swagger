@@ -1,0 +1,52 @@
+swagger: '2.0'
+info:
+  version: '0.0.1'
+  title: JuezMadrid
+  description: API for consult and send problem and stats
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /login:
+    get:
+      description: Give username and password and let access to system
+      operationId: login
+      produces:
+        - application/json
+      parameters:
+        - username: limit
+          in: query
+          description: name of user
+          required: true
+          type: string
+        - passwd: limit
+          in: query
+          description: password of user
+          required: false
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+definitions:
+  errorModel:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
